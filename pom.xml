@@ -39,6 +39,10 @@
                         <version>${checkstyle.version}</version>
                     </dependency>
                 </dependencies>
+                <configuration>
+                    <!-- location of custom checkstyle rules -->
+                    <configLocation>.provision/checkstyle.xml</configLocation>
+                </configuration>
             </plugin>
         </plugins>
     </build>

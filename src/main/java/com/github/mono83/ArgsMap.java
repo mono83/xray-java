@@ -10,6 +10,9 @@ import java.util.Optional;
  * Provides values deduplication.
  */
 public class ArgsMap implements Args {
+    /**
+     * Arguments.
+     */
     private final HashMap<String, Arg> args;
 
     /**
