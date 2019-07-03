@@ -3,6 +3,7 @@ package com.github.mono83;
 /**
  * Arg represents logging argument.
  * It consists of key and multiple values.
+ * Immutable, thread safe.
  */
 public interface Arg {
     /**

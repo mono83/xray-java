@@ -1,5 +1,6 @@
 package com.github.mono83;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -91,9 +92,9 @@ public class ArgGeneric<T> implements Arg {
             return "";
         }
         if (index < 0 || index >= values.length) {
-            return values[values.length - 1].toString();
+            return toString(values[values.length - 1]);
         }
-        return values[index].toString();
+        return toString(values[index]);
     }
 
     /**
@@ -126,5 +127,24 @@ public class ArgGeneric<T> implements Arg {
     @Override
     public int size() {
         return values.length;
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ArgGeneric arg = (ArgGeneric) o;
+        return key.equals(arg.key) && Arrays.equals(values, arg.values);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(key);
+        result = 31 * result + Arrays.hashCode(values);
+        return result;
     }
 }
