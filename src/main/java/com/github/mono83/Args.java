@@ -1,9 +1,11 @@
 package com.github.mono83;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
  * Collection of arguments.
+ * Immutable, thread safe.
  */
 public interface Args extends Iterable<Arg> {
     /**
@@ -28,6 +30,33 @@ public interface Args extends Iterable<Arg> {
         } else {
             return new ArgsMap(args);
         }
+    }
+
+    /**
+     * Constructs new arguments collection eagerly merging.
+     * values and deduplicating it using {@link ArgsMap}
+     *
+     * @param left  Arguments collection
+     * @param right Arguments to add, they will override
+     *              existing ones if name collides.
+     * @return New arguments collection
+     */
+    static Args append(final Args left, final Arg... right) {
+        if (left == null || left.isEmpty()) {
+            return of(right);
+        }
+        if (right == null || right.length == 0) {
+            return left;
+        }
+
+        ArrayList<Arg> args = new ArrayList<>(left.size() + right.length);
+        for (Arg a : left) {
+            args.add(a);
+        }
+        for (Arg a : right) {
+            args.add(a);
+        }
+        return new ArgsMap(args);
     }
 
     /**
