@@ -26,25 +26,7 @@ public interface Ray extends ReporterLogs, ReporterMetrics {
      * @param nameSupplier Logger name supplier
      * @return New ray
      */
-    default Ray with(final Supplier<String> nameSupplier) {
-        Objects.requireNonNull(nameSupplier);
-        return this.with(nameSupplier.get());
-    }
-
-    /**
-     * Clones ray on same level with new logger name.
-     *
-     * @param logger Logger, name will be taken from class name
-     * @return New ray
-     */
-    default Ray with(final Object logger) {
-        Objects.requireNonNull(logger);
-        return this.with(
-                logger instanceof Class
-                        ? ((Class) logger).getName()
-                        : logger.getClass().getName()
-        );
-    }
+    Ray with(final Supplier<String> nameSupplier);
 
     /**
      * Clones ray on same level with new logger name

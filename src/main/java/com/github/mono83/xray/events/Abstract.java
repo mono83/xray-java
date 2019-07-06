@@ -2,7 +2,6 @@ package com.github.mono83.xray.events;
 
 import com.github.mono83.xray.Arg;
 import com.github.mono83.xray.Args;
-import com.github.mono83.xray.Ray;
 
 import java.time.Duration;
 import java.util.Objects;
@@ -10,7 +9,7 @@ import java.util.Objects;
 /**
  * Abstract ray implementation built over event emitting.
  */
-public abstract class Abstract implements Ray {
+public abstract class Abstract implements com.github.mono83.xray.Ray {
     /**
      * Emits provided logging event into emitter processing loop.
      *

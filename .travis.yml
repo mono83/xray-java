@@ -3,6 +3,5 @@ dist: xenial
 script:
   - mvn clean test
 jdk:
-  - oraclejdk9
   - openjdk10
   - openjdk11
