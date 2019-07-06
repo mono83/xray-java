@@ -1,4 +1,4 @@
-package com.github.mono83;
+package com.github.mono83.xray;
 
 import java.util.HashMap;
 import java.util.Optional;

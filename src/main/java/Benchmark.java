@@ -1,5 +1,5 @@
-import com.github.mono83.BenchmarkArg;
-import com.github.mono83.BenchmarkReplacer;
+import com.github.mono83.xray.BenchmarkArg;
+import com.github.mono83.xray.BenchmarkReplacer;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
