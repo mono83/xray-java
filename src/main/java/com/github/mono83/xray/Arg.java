@@ -1,4 +1,4 @@
-package com.github.mono83;
+package com.github.mono83.xray;
 
 /**
  * Arg represents logging argument.

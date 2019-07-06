@@ -1,4 +1,4 @@
-package com.github.mono83;
+package com.github.mono83.xray;
 
 import java.util.Arrays;
 import java.util.Objects;
