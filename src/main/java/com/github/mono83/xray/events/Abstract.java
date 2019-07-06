@@ -1,4 +1,4 @@
-package com.github.mono83.events;
+package com.github.mono83.xray.events;
 
 import com.github.mono83.xray.Arg;
 import com.github.mono83.xray.Args;
@@ -31,7 +31,7 @@ public abstract class Abstract implements Ray {
     protected abstract Args getArgs();
 
     /**
-     * Utility method, used to compose metric name
+     * Utility method, used to compose metric name.
      *
      * @param suffix Metric suffix
      * @return Metric name

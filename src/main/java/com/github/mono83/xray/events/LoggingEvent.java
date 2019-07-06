@@ -1,4 +1,4 @@
-package com.github.mono83.events;
+package com.github.mono83.xray.events;
 
 import com.github.mono83.xray.Arg;
 import com.github.mono83.xray.Args;
@@ -18,11 +18,11 @@ public class LoggingEvent {
      */
     public final Level level;
     /**
-     * Message to log
+     * Message to log.
      */
     public final String message;
     /**
-     * Logging arguments
+     * Logging arguments.
      */
     public final Args args;
 
@@ -31,8 +31,8 @@ public class LoggingEvent {
      *
      * @param level   Level
      * @param message Message
-     * @param rayArgs
-     * @param args
+     * @param rayArgs Arguments collection, obtained from ray
+     * @param args    Arguments collection, provided during event creation
      */
     public LoggingEvent(
             final Level level,
@@ -43,9 +43,12 @@ public class LoggingEvent {
         this.millis = System.currentTimeMillis();
         this.level = Objects.requireNonNull(level, "type");
         this.message = Objects.requireNonNull(message, "message");
-        this.args = null; // TODO lazy args merging
+        this.args = LazyMergedArgs.of(rayArgs, args);
     }
 
+    /**
+     * Logging event level.
+     */
     public enum Level {
         TRACE, DEBUG, INFO, WARNING, ERROR, ALERT, EMERGENCY;
     }
