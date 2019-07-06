@@ -82,8 +82,8 @@ public interface Ray extends ReporterLogs, ReporterMetrics {
         return this.with(
                 logger instanceof Class
                         ? ((Class) logger).getName()
-                        : logger.getClass().getName()
-                , metricPrefix
+                        : logger.getClass().getName(),
+                metricPrefix
         );
     }
 
