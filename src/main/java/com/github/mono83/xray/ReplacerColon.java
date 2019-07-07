@@ -7,6 +7,27 @@ import java.util.function.BiFunction;
  * Replaces placeholders in colon-prefixed format (like :name).
  */
 public class ReplacerColon implements BiFunction<String, Args, String> {
+    /**
+     * If true, placeholder values after replacement will be surrounded by brackets.
+     */
+    private final boolean useBrackets;
+
+    /**
+     * Constructs replacer instance.
+     */
+    public ReplacerColon() {
+        this(false);
+    }
+
+    /**
+     * Constructs new replacer instance.
+     *
+     * @param useBrackets If true, placeholder values after replacement will be surrounded by brackets
+     */
+    public ReplacerColon(final boolean useBrackets) {
+        this.useBrackets = useBrackets;
+    }
+
     @Override
     public String apply(final String s, final Args args) {
         if (s == null || s.isEmpty()) {
@@ -17,7 +38,7 @@ public class ReplacerColon implements BiFunction<String, Args, String> {
         }
 
         // Replacing
-        Builder result = new Builder(args);
+        Builder result = new Builder(useBrackets, args);
         StringBuilder key = null;
         boolean space = true;
         for (char c : s.toCharArray()) {
@@ -66,6 +87,10 @@ public class ReplacerColon implements BiFunction<String, Args, String> {
          */
         private final HashMap<String, Integer> evidences = new HashMap<>();
         /**
+         * If true, placeholder values after replacement will be surrounded by brackets.
+         */
+        private final boolean useBrackets;
+        /**
          * Provided logging arguments collection.
          */
         private final Args args;
@@ -73,9 +98,11 @@ public class ReplacerColon implements BiFunction<String, Args, String> {
         /**
          * Constructs builder.
          *
-         * @param args Provided logging arguments
+         * @param useBrackets If true, placeholder values after replacement will be surrounded by brackets.
+         * @param args        Provided logging arguments
          */
-        Builder(final Args args) {
+        Builder(final boolean useBrackets, final Args args) {
+            this.useBrackets = useBrackets;
             this.args = args;
         }
 
@@ -99,7 +126,13 @@ public class ReplacerColon implements BiFunction<String, Args, String> {
             args.get(name).ifPresentOrElse(
                     arg -> {
                         int index = evidences.computeIfAbsent(arg.getKey(), s -> 0);
+                        if (useBrackets) {
+                            sb.append('[');
+                        }
                         sb.append(arg.getValue(index++));
+                        if (useBrackets) {
+                            sb.append(']');
+                        }
                         evidences.put(arg.getKey(), index);
                     },
                     () -> sb.append("<!").append(name).append("!>")

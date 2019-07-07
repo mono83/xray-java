@@ -18,6 +18,10 @@ public class LoggingEvent {
      */
     public final Level level;
     /**
+     * Logger name.
+     */
+    public final String logger;
+    /**
      * Message to log.
      */
     public final String message;
@@ -30,18 +34,21 @@ public class LoggingEvent {
      * Constructs new logging event.
      *
      * @param level   Level
+     * @param logger  Logger name
      * @param message Message
      * @param rayArgs Arguments collection, obtained from ray
      * @param args    Arguments collection, provided during event creation
      */
     public LoggingEvent(
             final Level level,
+            final String logger,
             final String message,
             final Args rayArgs,
             final Arg... args
     ) {
         this.millis = System.currentTimeMillis();
         this.level = Objects.requireNonNull(level, "type");
+        this.logger = Objects.requireNonNull(logger, "logger");
         this.message = Objects.requireNonNull(message, "message");
         this.args = LazyMergedArgs.of(rayArgs, args);
     }
@@ -50,6 +57,6 @@ public class LoggingEvent {
      * Logging event level.
      */
     public enum Level {
-        TRACE, DEBUG, INFO, WARNING, ERROR, ALERT, EMERGENCY;
+        TRACE, DEBUG, INFO, WARNING, ERROR, ALERT, EMERGENCY
     }
 }

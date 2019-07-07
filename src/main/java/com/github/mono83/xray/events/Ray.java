@@ -205,6 +205,11 @@ public class Ray extends Abstract {
     }
 
     @Override
+    protected String getLoggerName() {
+        return name;
+    }
+
+    @Override
     public Ray fork() {
         return new Ray(this, rayIdGenerator.get(), null, null, null);
     }

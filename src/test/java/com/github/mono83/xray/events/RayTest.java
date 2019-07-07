@@ -164,7 +164,7 @@ public class RayTest {
 
     @Test(dependsOnMethods = {"testHandleLogs", "testHandleMetrics"})
     public void testEmit() {
-        LoggingEvent e1 = new LoggingEvent(LoggingEvent.Level.ALERT, "foo", Args.of());
+        LoggingEvent e1 = new LoggingEvent(LoggingEvent.Level.ALERT, "foo", "", Args.of());
         MetricEvent e2 = new MetricEvent(MetricEvent.Type.GAUGE, "bar", 12, Args.of());
 
         AtomicInteger ai = new AtomicInteger();

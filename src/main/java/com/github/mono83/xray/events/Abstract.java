@@ -37,10 +37,16 @@ public abstract class Abstract implements com.github.mono83.xray.Ray {
      */
     protected abstract String composeMetricName(String suffix);
 
+    /**
+     * @return Logger name
+     */
+    protected abstract String getLoggerName();
+
     @Override
     public void trace(final String message, final Arg... args) {
         emit(new LoggingEvent(
                 LoggingEvent.Level.TRACE,
+                getLoggerName(),
                 message,
                 getArgs(),
                 args
@@ -51,6 +57,7 @@ public abstract class Abstract implements com.github.mono83.xray.Ray {
     public void debug(final String message, final Arg... args) {
         emit(new LoggingEvent(
                 LoggingEvent.Level.DEBUG,
+                getLoggerName(),
                 message,
                 getArgs(),
                 args
@@ -61,6 +68,7 @@ public abstract class Abstract implements com.github.mono83.xray.Ray {
     public void info(final String message, final Arg... args) {
         emit(new LoggingEvent(
                 LoggingEvent.Level.INFO,
+                getLoggerName(),
                 message,
                 getArgs(),
                 args
@@ -71,6 +79,7 @@ public abstract class Abstract implements com.github.mono83.xray.Ray {
     public void warning(final String message, final Arg... args) {
         emit(new LoggingEvent(
                 LoggingEvent.Level.WARNING,
+                getLoggerName(),
                 message,
                 getArgs(),
                 args
@@ -81,6 +90,7 @@ public abstract class Abstract implements com.github.mono83.xray.Ray {
     public void error(final String message, final Arg... args) {
         emit(new LoggingEvent(
                 LoggingEvent.Level.ERROR,
+                getLoggerName(),
                 message,
                 getArgs(),
                 args
@@ -91,6 +101,7 @@ public abstract class Abstract implements com.github.mono83.xray.Ray {
     public void alert(final String message, final Arg... args) {
         emit(new LoggingEvent(
                 LoggingEvent.Level.ALERT,
+                getLoggerName(),
                 message,
                 getArgs(),
                 args
@@ -101,6 +112,7 @@ public abstract class Abstract implements com.github.mono83.xray.Ray {
     public void emergency(final String message, final Arg... args) {
         emit(new LoggingEvent(
                 LoggingEvent.Level.EMERGENCY,
+                getLoggerName(),
                 message,
                 getArgs(),
                 args
