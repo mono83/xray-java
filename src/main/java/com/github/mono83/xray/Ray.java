@@ -26,7 +26,7 @@ public interface Ray extends ReporterLogs, ReporterMetrics {
      * @param nameSupplier Logger name supplier
      * @return New ray
      */
-    Ray with(final Supplier<String> nameSupplier);
+    Ray with(Supplier<String> nameSupplier);
 
     /**
      * Clones ray on same level with new logger name
