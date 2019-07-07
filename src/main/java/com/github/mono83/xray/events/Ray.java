@@ -2,6 +2,7 @@ package com.github.mono83.xray.events;
 
 import com.github.mono83.xray.Arg;
 import com.github.mono83.xray.Args;
+import com.github.mono83.xray.generators.Incremental;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -11,6 +12,21 @@ import java.util.function.Supplier;
  * Event based implementation of {@link com.github.mono83.xray.Ray}.
  */
 public class Ray extends Abstract {
+    /**
+     * Static reference to root-level ray.
+     */
+    public static final Ray ROOT;
+    /**
+     * Static reference for special ray, that should be used in
+     * application startup process.
+     */
+    public static final Ray BOOT;
+
+    static {
+        ROOT = new Ray("ROOT", "", new Incremental());
+        BOOT = ROOT.fork().with("BOOT");
+    }
+
     /**
      * Parent ray.
      */
