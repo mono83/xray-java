@@ -136,4 +136,14 @@ public enum Names {
         }
         return ArgLong.of(getName(), (long) collection.size());
     }
+
+    /**
+     * Builds argument (ERROR in most cases) that contains exception.
+     *
+     * @param error Exception to place into logging argument.
+     * @return Argument that contains exception
+     */
+    public Arg of(final Throwable error) {
+        return ArgException.of(getName(), error);
+    }
 }
