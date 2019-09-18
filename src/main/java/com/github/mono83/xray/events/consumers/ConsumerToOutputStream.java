@@ -118,4 +118,9 @@ public class ConsumerToOutputStream implements Consumer<LoggingEvent> {
             // Exception suppressed
         }
     }
+
+    @Override
+    public String toString() {
+        return "[To OutputStream]";
+    }
 }
