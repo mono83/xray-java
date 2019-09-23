@@ -61,4 +61,15 @@ public class ReplacerColonTest {
                 "There is one, two and two"
         );
     }
+
+    @Test(dependsOnMethods = "testStandardMatch")
+    public void testMultiplePlaceholdersWithBrackets() {
+        Assert.assertEquals(
+                new ReplacerColon(true).apply(
+                        "There is :name, :name and :name",
+                        Args.of(Names.NAME.of("one", "two"))
+                ),
+                "There is [one], [two] and [two]"
+        );
+    }
 }
