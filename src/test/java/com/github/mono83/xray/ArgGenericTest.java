@@ -42,7 +42,7 @@ public class ArgGenericTest {
     }
 
     @Test(dependsOnMethods = "testStandardMethods")
-    public void testEqualsAndHashCode() {
+    public void testEquals() {
         ArgGeneric<Duration> a = new ArgGeneric<>("foo", new Duration[]{Duration.ofMinutes(3)});
         ArgGeneric<Duration> b = new ArgGeneric<>("bar", new Duration[0]);
         ArgGeneric<Duration> c = new ArgGeneric<>("foo", new Duration[]{Duration.ofMinutes(3)});
@@ -60,16 +60,9 @@ public class ArgGenericTest {
         Assert.assertNotEquals(a, d);
         Assert.assertNotEquals(a, e);
         Assert.assertFalse(a.equals(null));
-
-        // Hash code
-        Assert.assertEquals(a.hashCode(), 3149966);
-        Assert.assertEquals(b.hashCode(), 3017231);
-        Assert.assertEquals(c.hashCode(), 3149966);
-        Assert.assertEquals(d.hashCode(), 3149789);
-        Assert.assertEquals(e.hashCode(), 3156299);
     }
 
-    @Test(dependsOnMethods = "testEqualsAndHashCode")
+    @Test(dependsOnMethods = "testEquals")
     public void testStaticOfGenerics() {
         Object o1 = new Object();
         Object o2 = new Object();
@@ -80,7 +73,7 @@ public class ArgGenericTest {
         Assert.assertEquals(ArgGeneric.of("xxx", new Object[0]), new ArgNull("xxx"));
     }
 
-    @Test(dependsOnMethods = "testEqualsAndHashCode")
+    @Test(dependsOnMethods = "testEquals")
     public void testStaticOfStrings() {
         Assert.assertEquals(ArgGeneric.of("foo", "a"), new ArgGeneric<>("foo", new String[]{"a"}));
         Assert.assertEquals(ArgGeneric.of("bar", "a", "b"), new ArgGeneric<>("bar", new String[]{"a", "b"}));
@@ -88,7 +81,7 @@ public class ArgGenericTest {
         Assert.assertEquals(ArgGeneric.of("xxx", new String[0]), new ArgNull("xxx"));
     }
 
-    @Test(dependsOnMethods = "testEqualsAndHashCode")
+    @Test(dependsOnMethods = "testEquals")
     public void testStaticOfEnums() {
         Assert.assertEquals(ArgGeneric.of("foo", TestEnum.TRUE), new ArgGeneric<>("foo", new TestEnum[]{TestEnum.TRUE}));
         Assert.assertEquals(ArgGeneric.of("bar", TestEnum.TRUE, TestEnum.FALSE), new ArgGeneric<>("bar", new TestEnum[]{TestEnum.TRUE, TestEnum.FALSE}));

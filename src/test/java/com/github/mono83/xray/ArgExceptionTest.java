@@ -42,7 +42,7 @@ public class ArgExceptionTest {
     }
 
     @Test(dependsOnMethods = "testStandardMethods")
-    public void testEqualsAndHashCode() {
+    public void testEquals() {
         RuntimeException foo = new RuntimeException("This is exception");
         ArgException a = new ArgException("foo", foo);
         ArgException b = new ArgException("bar", foo);
@@ -56,15 +56,9 @@ public class ArgExceptionTest {
         Assert.assertNotEquals(a, b);
         Assert.assertNotEquals(a, d);
         Assert.assertFalse(a.equals(null));
-
-        // Hash code
-        Assert.assertEquals(a.hashCode(), 1358530361);
-        Assert.assertEquals(b.hashCode(), 1354422086);
-        Assert.assertEquals(c.hashCode(), 1358530361);
-        Assert.assertEquals(d.hashCode(), 1358530361);
     }
 
-    @Test(dependsOnMethods = "testEqualsAndHashCode")
+    @Test(dependsOnMethods = "testEquals")
     public void testStaticOf() {
         RuntimeException foo = new RuntimeException("This is exception");
 
