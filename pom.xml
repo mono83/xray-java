@@ -14,9 +14,17 @@
         <jmh.version>1.21</jmh.version>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub MONO83 Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/mono83/xray-java</url>
+        </repository>
+    </distributionManagement>
+
     <groupId>com.github.mono83</groupId>
     <artifactId>xray</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>
@@ -44,6 +52,18 @@
                     <!-- location of custom checkstyle rules -->
                     <configLocation>.provision/checkstyle.xml</configLocation>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>checkstyle</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <failOnViolation>true</failOnViolation>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

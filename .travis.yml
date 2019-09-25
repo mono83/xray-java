@@ -1,0 +1,8 @@
+language: java
+dist: xenial
+script:
+  - mvn clean test
+jdk:
+  - openjdk11
+  - openjdk12
+  - openjdk13
