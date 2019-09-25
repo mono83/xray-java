@@ -4,11 +4,23 @@ import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class Benchmark {
-    public static void main(String[] args) throws Exception {
-        Options opt = new OptionsBuilder()
-                .include(BenchmarkArg.class.getSimpleName())
-                .include(BenchmarkReplacer.class.getSimpleName())
+    public static void main(final String[] raw) throws Exception {
+        Set<String> args = Arrays.stream(raw).map(String::trim).map(String::toLowerCase).collect(Collectors.toSet());
+
+        OptionsBuilder builder = new OptionsBuilder();
+        if (args.size() == 0 || args.contains("arg")) {
+            builder.include(BenchmarkArg.class.getSimpleName());
+        }
+        if (args.size() == 0 || args.contains("replacer")) {
+            builder.include(BenchmarkReplacer.class.getSimpleName());
+        }
+
+        Options opt = builder
                 .forks(1)
                 .build();
 
