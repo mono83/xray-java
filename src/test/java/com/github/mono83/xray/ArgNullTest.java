@@ -7,7 +7,7 @@ public class ArgNullTest {
     @Test
     public void testStandardMethods() {
         ArgNull a = new ArgNull("foo");
-        Assert.assertEquals(a.getKey(), "foo");
+        Assert.assertEquals(a.getName(), "foo");
         Assert.assertEquals(a.size(), 0);
         Assert.assertEquals(a.getValue(0), "");
         Assert.assertEquals(a.getValue(1), "");
@@ -37,8 +37,8 @@ public class ArgNullTest {
         Assert.assertFalse(a.equals(null));
 
         // Hash code
-        Assert.assertEquals(a.hashCode(), a.getKey().hashCode());
-        Assert.assertEquals(b.hashCode(), b.getKey().hashCode());
-        Assert.assertEquals(c.hashCode(), c.getKey().hashCode());
+        Assert.assertEquals(a.hashCode(), a.getName().hashCode());
+        Assert.assertEquals(b.hashCode(), b.getName().hashCode());
+        Assert.assertEquals(c.hashCode(), c.getName().hashCode());
     }
 }

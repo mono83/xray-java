@@ -14,7 +14,7 @@ final class ArgsEmpty implements Args {
     static final ArgsEmpty INSTANCE = new ArgsEmpty();
 
     @Override
-    public Optional<Arg> get(final String key) {
+    public Optional<Arg> get(final String name) {
         return Optional.empty();
     }
 

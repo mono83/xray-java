@@ -62,10 +62,10 @@ public interface Args extends Iterable<Arg> {
     /**
      * Obtains logging argument by its name.
      *
-     * @param key Argument key (name)
+     * @param name Argument name
      * @return Logging argument if found
      */
-    Optional<Arg> get(String key);
+    Optional<Arg> get(String name);
 
     /**
      * @return Amount of arguments within arguments collection

@@ -10,80 +10,80 @@ import java.util.Objects;
  */
 public class ArgGeneric<T> implements Arg {
     /**
-     * Contains logging argument key (name).
+     * Contains logging argument name.
      */
-    private final String key;
+    private final String name;
     /**
      * Contains argument values.
      */
     private final T[] values;
 
     /**
+     * Constructs logging argument with generic values.
+     *
+     * @param name   Logging argument name
+     * @param values Argument values
+     */
+    ArgGeneric(final String name, final T[] values) {
+        Objects.requireNonNull(name, "name");
+        Objects.requireNonNull(values, "values");
+
+        this.name = name;
+        this.values = values;
+    }
+
+    /**
      * Builds and returns generic argument instance for provided values.
      * Will return {@link ArgNull} if empty values provided.
      *
-     * @param key    Argument key (name)
+     * @param name   Argument name
      * @param values Argument values
      * @param <T>    Generic argument type
      * @return Logging argument
      */
-    public static <T> Arg of(final String key, final T[] values) {
+    public static <T> Arg of(final String name, final T[] values) {
         if (values == null || values.length == 0) {
-            return new ArgNull(key);
+            return new ArgNull(name);
         }
 
-        return new ArgGeneric<>(key, values);
+        return new ArgGeneric<>(name, values);
     }
 
     /**
      * Builds and returns generic argument instance for provided values.
      * Will return {@link ArgNull} if empty values provided.
      *
-     * @param key    Argument key (name)
+     * @param name   Argument name
      * @param values Argument values
      * @return Logging argument
      */
-    public static Arg of(final String key, final String... values) {
+    public static Arg of(final String name, final String... values) {
         if (values == null || values.length == 0) {
-            return new ArgNull(key);
+            return new ArgNull(name);
         }
 
-        return new ArgGeneric<>(key, values);
+        return new ArgGeneric<>(name, values);
     }
 
     /**
      * Builds and returns generic argument instance for provided values.
      * Will return {@link ArgNull} if empty values provided.
      *
-     * @param key    Argument key (name)
+     * @param name   Argument name
      * @param values Argument values
      * @return Logging argument
      */
-    public static Arg of(final String key, final Enum... values) {
+    public static Arg of(final String name, final Enum... values) {
         if (values == null || values.length == 0) {
-            return new ArgNull(key);
+            return new ArgNull(name);
         }
 
-        return new ArgGeneric<>(key, values);
-    }
-
-    /**
-     * Constructs logging argument with generic values.
-     *
-     * @param key    Logging argument key (name)
-     * @param values Argument values
-     */
-    ArgGeneric(final String key, final T[] values) {
-        Objects.requireNonNull(key, "key");
-        Objects.requireNonNull(values, "values");
-
-        this.key = key;
-        this.values = values;
+        return new ArgGeneric<>(name, values);
     }
 
     @Override
-    public String getKey() {
-        return key;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -138,12 +138,12 @@ public class ArgGeneric<T> implements Arg {
             return false;
         }
         ArgGeneric arg = (ArgGeneric) o;
-        return key.equals(arg.key) && Arrays.equals(values, arg.values);
+        return name.equals(arg.name) && Arrays.equals(values, arg.values);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(key);
+        int result = Objects.hash(name);
         result = 31 * result + Arrays.hashCode(values);
         return result;
     }

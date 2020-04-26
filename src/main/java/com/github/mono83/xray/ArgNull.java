@@ -7,23 +7,23 @@ import java.util.Objects;
  */
 public final class ArgNull implements Arg {
     /**
-     * Contains logging argument key (name).
+     * Contains logging argument name.
      */
-    private final String key;
+    private final String name;
 
     /**
      * Constructs new logging argument without value.
      *
-     * @param key Argument key (name)
+     * @param name Argument name
      */
-    ArgNull(final String key) {
-        Objects.requireNonNull(key, "key");
-        this.key = key;
+    ArgNull(final String name) {
+        Objects.requireNonNull(name, "name");
+        this.name = name;
     }
 
     @Override
-    public String getKey() {
-        return key;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -50,11 +50,11 @@ public final class ArgNull implements Arg {
             return false;
         }
         ArgNull argNull = (ArgNull) o;
-        return key.equals(argNull.key);
+        return name.equals(argNull.name);
     }
 
     @Override
     public int hashCode() {
-        return key.hashCode();
+        return name.hashCode();
     }
 }

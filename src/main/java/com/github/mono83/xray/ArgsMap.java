@@ -24,7 +24,7 @@ public class ArgsMap implements Args {
         Objects.requireNonNull(args, "args");
         this.args = new HashMap<>(args.length);
         for (Arg a : args) {
-            this.args.put(a.getKey(), a);
+            this.args.put(a.getName(), a);
         }
     }
 
@@ -37,14 +37,14 @@ public class ArgsMap implements Args {
         Objects.requireNonNull(source, "source");
         this.args = new HashMap<>();
         for (Arg a : source) {
-            this.args.put(a.getKey(), a);
+            this.args.put(a.getName(), a);
         }
     }
 
     @Override
-    public Optional<Arg> get(final String key) {
-        Objects.requireNonNull(key, "key");
-        return Optional.ofNullable(args.get(key));
+    public Optional<Arg> get(final String name) {
+        Objects.requireNonNull(name, "name");
+        return Optional.ofNullable(args.get(name));
     }
 
     @Override

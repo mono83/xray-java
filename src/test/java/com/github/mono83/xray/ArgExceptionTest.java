@@ -9,7 +9,7 @@ public class ArgExceptionTest {
         RuntimeException foo = new RuntimeException("This is exception");
         ArgException a = new ArgException("foo", foo);
 
-        Assert.assertEquals(a.getKey(), "foo");
+        Assert.assertEquals(a.getName(), "foo");
         Assert.assertEquals(a.size(), 1);
         Assert.assertEquals(a.getValue(0), "This is exception");
         Assert.assertEquals(a.getValue(1300), "This is exception"); // Last one
@@ -36,7 +36,7 @@ public class ArgExceptionTest {
     @Test(dependsOnMethods = "testStandardMethods")
     public void testNullMessage() {
         ArgException a = new ArgException("foo", new RuntimeException((String) null));
-        Assert.assertEquals(a.getKey(), "foo");
+        Assert.assertEquals(a.getName(), "foo");
         Assert.assertEquals(a.size(), 1);
         Assert.assertEquals(a.getValue(0), "java.lang.RuntimeException");
     }

@@ -120,10 +120,10 @@ public abstract class Abstract implements com.github.mono83.xray.Ray {
     }
 
     @Override
-    public void inc(final String key, final long value, final Arg... args) {
+    public void inc(final String name, final long value, final Arg... args) {
         emit(new MetricEvent(
                 MetricEvent.Type.INCREMENT,
-                composeMetricName(key),
+                composeMetricName(name),
                 value,
                 getArgs(),
                 args
@@ -131,10 +131,10 @@ public abstract class Abstract implements com.github.mono83.xray.Ray {
     }
 
     @Override
-    public void gauge(final String key, final long value, final Arg... args) {
+    public void gauge(final String name, final long value, final Arg... args) {
         emit(new MetricEvent(
                 MetricEvent.Type.GAUGE,
-                composeMetricName(key),
+                composeMetricName(name),
                 value,
                 getArgs(),
                 args
@@ -142,10 +142,10 @@ public abstract class Abstract implements com.github.mono83.xray.Ray {
     }
 
     @Override
-    public void duration(final String key, final Duration duration, final Arg... args) {
+    public void duration(final String name, final Duration duration, final Arg... args) {
         emit(new MetricEvent(
                 MetricEvent.Type.GAUGE,
-                composeMetricName(key),
+                composeMetricName(name),
                 Objects.requireNonNull(duration, "duration").toNanos(),
                 getArgs(),
                 args

@@ -17,6 +17,29 @@ import java.util.Optional;
  */
 class LazyMergedArgs implements Args {
     /**
+     * Arguments from ray.
+     */
+    private final Args rayArgs;
+    /**
+     * Arguments from event.
+     */
+    private final Arg[] eventArgs;
+    /**
+     * Merged arguments.
+     */
+    private volatile Args merged;
+    /**
+     * Constructs lazy arguments collection.
+     *
+     * @param args Arguments from ray
+     * @param a    Arguments from event
+     */
+    private LazyMergedArgs(final Args args, final Arg[] a) {
+        this.rayArgs = args;
+        this.eventArgs = a;
+    }
+
+    /**
      * Merges provided arguments.
      *
      * @param args Arguments collection from ray
@@ -29,30 +52,6 @@ class LazyMergedArgs implements Args {
         }
 
         return new LazyMergedArgs(args, a);
-    }
-
-    /**
-     * Arguments from ray.
-     */
-    private final Args rayArgs;
-    /**
-     * Arguments from event.
-     */
-    private final Arg[] eventArgs;
-    /**
-     * Merged arguments.
-     */
-    private volatile Args merged;
-
-    /**
-     * Constructs lazy arguments collection.
-     *
-     * @param args Arguments from ray
-     * @param a    Arguments from event
-     */
-    private LazyMergedArgs(final Args args, final Arg[] a) {
-        this.rayArgs = args;
-        this.eventArgs = a;
     }
 
     /**
@@ -73,8 +72,8 @@ class LazyMergedArgs implements Args {
     }
 
     @Override
-    public Optional<Arg> get(final String key) {
-        return getMerged().get(key);
+    public Optional<Arg> get(final String name) {
+        return getMerged().get(name);
     }
 
     @Override

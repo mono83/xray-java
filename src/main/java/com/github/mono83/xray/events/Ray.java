@@ -62,24 +62,6 @@ public class Ray extends Abstract {
     volatile Consumer<MetricEvent>[] consumersMetric;
 
     /**
-     * Utility method, used to concatenate two metric prefixes.
-     *
-     * @param prefix Prefix
-     * @param value  Value
-     * @return Concatenated value
-     */
-    static String concat(final String prefix, final String value) {
-        if (prefix == null || prefix.length() == 0) {
-            return value;
-        }
-        if (value == null || value.length() == 0) {
-            return prefix;
-        }
-
-        return prefix.trim() + "." + value.trim();
-    }
-
-    /**
      * Public constructor, used to create top level (root) ray.
      *
      * @param name           Ray name
@@ -119,6 +101,24 @@ public class Ray extends Abstract {
                 ? parent.metricPrefix
                 : concat(parent.metricPrefix, metricPrefix);
         this.args = args == null ? parent.args : args;
+    }
+
+    /**
+     * Utility method, used to concatenate two metric prefixes.
+     *
+     * @param prefix Prefix
+     * @param value  Value
+     * @return Concatenated value
+     */
+    static String concat(final String prefix, final String value) {
+        if (prefix == null || prefix.length() == 0) {
+            return value;
+        }
+        if (value == null || value.length() == 0) {
+            return prefix;
+        }
+
+        return prefix.trim() + "." + value.trim();
     }
 
     @Override

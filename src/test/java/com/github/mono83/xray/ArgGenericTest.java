@@ -13,7 +13,7 @@ public class ArgGenericTest {
                 Duration.ofSeconds(5)
         });
 
-        Assert.assertEquals(a.getKey(), "foo");
+        Assert.assertEquals(a.getName(), "foo");
         Assert.assertEquals(a.size(), 2);
         Assert.assertEquals(a.getValue(0), "PT1M");
         Assert.assertEquals(a.getValue(1), "PT5S");
@@ -27,7 +27,7 @@ public class ArgGenericTest {
     @Test(dependsOnMethods = "testStandardMethods")
     public void testEmpty() {
         ArgGeneric<String> a = new ArgGeneric<>("bar", new String[0]);
-        Assert.assertEquals(a.getKey(), "bar");
+        Assert.assertEquals(a.getName(), "bar");
         Assert.assertEquals(a.size(), 0);
         Assert.assertEquals(a.getValue(0), "");
         Assert.assertEquals(a.getValue(1), "");
