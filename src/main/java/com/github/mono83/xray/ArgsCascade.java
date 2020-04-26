@@ -6,15 +6,32 @@ import java.util.Objects;
 import java.util.Optional;
 
 /**
- * Experimental cascade arguments collection
+ * Experimental cascade arguments collection.
  */
 public class ArgsCascade implements Args {
+    /**
+     * Parent arguments collection.
+     */
     private final Args parent;
+    /**
+     * Argument on top of cascade.
+     */
     private final Arg arg;
+    /**
+     * Total amount of items in cascade.
+     */
+    private final int size;
 
+    /**
+     * Constructor.
+     *
+     * @param arg    Argument on top of cascade.
+     * @param parent Parent arguments collection, optional.
+     */
     ArgsCascade(final Arg arg, final Args parent) {
         this.arg = Objects.requireNonNull(arg, "arg");
         this.parent = parent;
+        this.size = parent == null ? 1 : 1 + parent.size();
     }
 
     @Override
@@ -26,7 +43,7 @@ public class ArgsCascade implements Args {
 
     @Override
     public int size() {
-        return -1;
+        return size;
     }
 
     @Override
@@ -36,27 +53,39 @@ public class ArgsCascade implements Args {
 
     @Override
     public Iterator<Arg> iterator() {
-        return new IteratorImpl(
-                parent == null ? null : parent.iterator(),
-                this
-        );
+        return new CascadeIterator(this);
     }
 
-    private static class IteratorImpl implements Iterator<Arg> {
+    /**
+     * Iterator implementation for arguments cascade.
+     */
+    private static class CascadeIterator implements Iterator<Arg> {
+        /**
+         * Parent iterator.
+         */
         private final Iterator<Arg> parent;
-        private final ArgsCascade cascade;
+        /**
+         * Argument on top of cascade.
+         */
+        private final Arg arg;
+        /**
+         * True when iterator reaches end.
+         */
         private boolean read = false;
 
-        IteratorImpl(final Iterator<Arg> parent, final ArgsCascade cascade) {
-            this.parent = parent;
-            this.cascade = cascade;
+        /**
+         * Iterator constructor.
+         *
+         * @param cascade Arguments cascade for iterator.
+         */
+        CascadeIterator(final ArgsCascade cascade) {
+            this.parent = cascade.parent == null ? null : cascade.parent.iterator();
+            this.arg = cascade.arg;
         }
 
         @Override
         public boolean hasNext() {
-            return parent != null
-                    ? parent.hasNext() || !read
-                    : !read;
+            return !read;
         }
 
         @Override
@@ -66,14 +95,14 @@ public class ArgsCascade implements Args {
             }
             if (parent != null && parent.hasNext()) {
                 Arg candidate = parent.next();
-                if (candidate.getName().equals(cascade.arg.getName())) {
+                if (candidate.getName().equals(arg.getName())) {
                     // Skipping values with same name
                     return this.next();
                 }
                 return candidate;
             }
             read = true;
-            return cascade.arg;
+            return arg;
         }
     }
 }
