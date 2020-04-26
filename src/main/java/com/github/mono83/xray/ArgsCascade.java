@@ -36,27 +36,28 @@ public class ArgsCascade implements Args {
 
     @Override
     public Iterator<Arg> iterator() {
-        return new IteratorImpl(
+        return new CascadeIterator(
                 parent == null ? null : parent.iterator(),
                 this
         );
     }
 
-    private static class IteratorImpl implements Iterator<Arg> {
+    /**
+     * Iterator implementation for arguments cascade
+     */
+    private static class CascadeIterator implements Iterator<Arg> {
         private final Iterator<Arg> parent;
         private final ArgsCascade cascade;
         private boolean read = false;
 
-        IteratorImpl(final Iterator<Arg> parent, final ArgsCascade cascade) {
+        CascadeIterator(final Iterator<Arg> parent, final ArgsCascade cascade) {
             this.parent = parent;
             this.cascade = cascade;
         }
 
         @Override
         public boolean hasNext() {
-            return parent != null
-                    ? parent.hasNext() || !read
-                    : !read;
+            return !read;
         }
 
         @Override
