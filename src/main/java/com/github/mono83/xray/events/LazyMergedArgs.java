@@ -47,7 +47,7 @@ class LazyMergedArgs implements Args {
      * @return Resulting lazy arguments collection
      */
     static Args of(final Args args, final Arg... a) {
-        if (args == null || a == null || args.size() == 0 || a.length == 0) {
+        if (args == null || a == null || args.isEmpty() || a.length == 0) {
             return Args.append(args, a);
         }
 
@@ -79,6 +79,11 @@ class LazyMergedArgs implements Args {
     @Override
     public int size() {
         return getMerged().size();
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
     }
 
     @Override

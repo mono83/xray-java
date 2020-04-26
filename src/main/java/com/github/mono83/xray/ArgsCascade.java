@@ -11,10 +11,12 @@ import java.util.Optional;
 public class ArgsCascade implements Args {
     private final Args parent;
     private final Arg arg;
+    private final int size;
 
     ArgsCascade(final Arg arg, final Args parent) {
         this.arg = Objects.requireNonNull(arg, "arg");
         this.parent = parent;
+        this.size = parent == null ? 1 : 1 + parent.size();
     }
 
     @Override
@@ -26,7 +28,7 @@ public class ArgsCascade implements Args {
 
     @Override
     public int size() {
-        return -1;
+        return size;
     }
 
     @Override
