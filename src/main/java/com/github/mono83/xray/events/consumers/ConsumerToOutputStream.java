@@ -104,7 +104,7 @@ public class ConsumerToOutputStream implements Consumer<LoggingEvent> {
         }
 
         // Appending message
-        sb.append(replacer.apply(event.message, event.args));
+        sb.append(event.getMessage(replacer));
 
         // Appending logger name
         sb.append(" @").append(event.logger);
