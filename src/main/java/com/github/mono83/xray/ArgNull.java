@@ -57,4 +57,9 @@ public final class ArgNull implements Arg {
     public int hashCode() {
         return name.hashCode();
     }
+
+    @Override
+    public String toString() {
+        return "{Arg: " + name + " is NULL}";
+    }
 }
