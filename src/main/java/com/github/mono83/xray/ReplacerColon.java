@@ -125,7 +125,7 @@ public class ReplacerColon implements BiFunction<String, Args, String> {
             final String name = key.toString();
             args.get(name).ifPresentOrElse(
                     arg -> {
-                        int index = evidences.computeIfAbsent(arg.getKey(), s -> 0);
+                        int index = evidences.computeIfAbsent(arg.getName(), s -> 0);
                         if (useBrackets) {
                             sb.append('[');
                         }
@@ -133,7 +133,7 @@ public class ReplacerColon implements BiFunction<String, Args, String> {
                         if (useBrackets) {
                             sb.append(']');
                         }
-                        evidences.put(arg.getKey(), index);
+                        evidences.put(arg.getName(), index);
                     },
                     () -> sb.append("<!").append(name).append("!>")
             );

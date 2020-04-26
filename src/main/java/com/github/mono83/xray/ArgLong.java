@@ -8,62 +8,62 @@ import java.util.Objects;
  */
 public class ArgLong implements Arg {
     /**
-     * Contains logging argument key (name).
+     * Contains logging argument name.
      */
-    private final String key;
+    private final String name;
     /**
      * Contains argument values.
      */
     private final long[] values;
 
     /**
-     * Builds and returns long argument instance for provided values.
-     * Will return {@link ArgNull} if empty values provided.
-     *
-     * @param key    Argument key (name)
-     * @param values Argument values
-     * @return Logging argument
-     */
-    public static Arg of(final String key, final long... values) {
-        if (values == null || values.length == 0) {
-            return new ArgNull(key);
-        }
-
-        return new ArgLong(key, values);
-    }
-
-    /**
-     * Builds and returns long argument instance for provided values.
-     * Will return {@link ArgNull} if empty values provided.
-     *
-     * @param key    Argument key (name)
-     * @param values Argument values
-     * @return Logging argument
-     */
-    public static Arg of(final String key, final int... values) {
-        if (values == null || values.length == 0) {
-            return new ArgNull(key);
-        }
-
-        return new ArgLong(key, Arrays.stream(values).asLongStream().toArray());
-    }
-
-    /**
      * Constructs logging argument with long values.
      *
-     * @param key    Logging argument key (name)
+     * @param name   Logging argument name
      * @param values Argument values
      */
-    ArgLong(final String key, final long... values) {
-        Objects.requireNonNull(key, "key");
+    ArgLong(final String name, final long... values) {
+        Objects.requireNonNull(name, "name");
         Objects.requireNonNull(values, "values");
-        this.key = key;
+        this.name = name;
         this.values = values;
     }
 
+    /**
+     * Builds and returns long argument instance for provided values.
+     * Will return {@link ArgNull} if empty values provided.
+     *
+     * @param name   Argument name
+     * @param values Argument values
+     * @return Logging argument
+     */
+    public static Arg of(final String name, final long... values) {
+        if (values == null || values.length == 0) {
+            return new ArgNull(name);
+        }
+
+        return new ArgLong(name, values);
+    }
+
+    /**
+     * Builds and returns long argument instance for provided values.
+     * Will return {@link ArgNull} if empty values provided.
+     *
+     * @param name   Argument name
+     * @param values Argument values
+     * @return Logging argument
+     */
+    public static Arg of(final String name, final int... values) {
+        if (values == null || values.length == 0) {
+            return new ArgNull(name);
+        }
+
+        return new ArgLong(name, Arrays.stream(values).asLongStream().toArray());
+    }
+
     @Override
-    public String getKey() {
-        return key;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -107,12 +107,12 @@ public class ArgLong implements Arg {
             return false;
         }
         ArgLong argLong = (ArgLong) o;
-        return key.equals(argLong.key) && Arrays.equals(values, argLong.values);
+        return name.equals(argLong.name) && Arrays.equals(values, argLong.values);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(key);
+        int result = Objects.hash(name);
         result = 31 * result + Arrays.hashCode(values);
         return result;
     }

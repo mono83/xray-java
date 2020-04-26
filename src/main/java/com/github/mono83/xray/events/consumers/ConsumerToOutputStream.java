@@ -7,6 +7,7 @@ import com.github.mono83.xray.events.LoggingEvent;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
@@ -57,7 +58,7 @@ public class ConsumerToOutputStream implements Consumer<LoggingEvent> {
     ) {
         this.os = Objects.requireNonNull(os, "os");
         this.replacer = Objects.requireNonNull(replacer, "replacer");
-        this.charset = Charset.forName("UTF-8");
+        this.charset = StandardCharsets.UTF_8;
         this.timeFormat = new SimpleDateFormat("HH:mm:ss.SSS");
         this.timeFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
     }

@@ -31,11 +31,11 @@ public class ArgsArray implements Args {
     }
 
     @Override
-    public Optional<Arg> get(final String key) {
-        Objects.requireNonNull(key, "key");
+    public Optional<Arg> get(final String name) {
+        Objects.requireNonNull(name, "name");
 
         for (int i = args.length - 1; i >= 0; i--) {
-            if (key.equals(args[i].getKey())) {
+            if (name.equals(args[i].getName())) {
                 return Optional.of(args[i]);
             }
         }

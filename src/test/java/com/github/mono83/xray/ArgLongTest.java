@@ -8,7 +8,7 @@ public class ArgLongTest {
     public void testStandardMethods() {
         ArgLong a = new ArgLong("foo", 18, -42);
 
-        Assert.assertEquals(a.getKey(), "foo");
+        Assert.assertEquals(a.getName(), "foo");
         Assert.assertEquals(a.size(), 2);
         Assert.assertEquals(a.getValue(0), "18");
         Assert.assertEquals(a.getValue(1), "-42");
@@ -22,7 +22,7 @@ public class ArgLongTest {
     @Test(dependsOnMethods = "testStandardMethods")
     public void testEmpty() {
         ArgLong a = new ArgLong("bar");
-        Assert.assertEquals(a.getKey(), "bar");
+        Assert.assertEquals(a.getName(), "bar");
         Assert.assertEquals(a.size(), 0);
         Assert.assertEquals(a.getValue(0), "");
         Assert.assertEquals(a.getValue(1), "");

@@ -7,39 +7,38 @@ import java.util.Objects;
  */
 public class ArgException implements Arg {
     /**
-     * Contains logging argument key (name).
+     * Contains logging argument name.
      */
-    private final String key;
+    private final String name;
     /**
      * Contains argument value.
      */
     private final Throwable error;
+    /**
+     * Constructs new logging argument for exception.
+     *
+     * @param name  Argument name
+     * @param error Exception (not null)
+     */
+    ArgException(final String name, final Throwable error) {
+        this.name = Objects.requireNonNull(name, "name");
+        this.error = Objects.requireNonNull(error, "error");
+    }
 
     /**
      * Builds and returns argument instance for provided exception.
      * Will return {@link ArgNull} if empty values provided.
      *
-     * @param key   Argument key (name)
+     * @param name  Argument name
      * @param error Argument values
      * @return Logging argument
      */
-    public static Arg of(final String key, final Throwable error) {
+    public static Arg of(final String name, final Throwable error) {
         if (error == null) {
-            return new ArgNull(key);
+            return new ArgNull(name);
         }
 
-        return new ArgException(key, error);
-    }
-
-    /**
-     * Constructs new logging argument for exception.
-     *
-     * @param key   Argument key (name)
-     * @param error Exception (not null)
-     */
-    ArgException(final String key, final Throwable error) {
-        this.key = Objects.requireNonNull(key, "key");
-        this.error = Objects.requireNonNull(error, "error");
+        return new ArgException(name, error);
     }
 
     /**
@@ -50,8 +49,8 @@ public class ArgException implements Arg {
     }
 
     @Override
-    public String getKey() {
-        return key;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -74,13 +73,13 @@ public class ArgException implements Arg {
             return false;
         }
         ArgException that = (ArgException) o;
-        return key.equals(that.key) && error.equals(that.error);
+        return name.equals(that.name) && error.equals(that.error);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                key,
+                name,
                 error.getClass(),
                 error.getMessage()
         );

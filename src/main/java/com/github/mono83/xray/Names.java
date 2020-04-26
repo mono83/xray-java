@@ -29,6 +29,14 @@ public enum Names {
     COUNT("count", int.class), SIZE("count", int.class);
 
     /**
+     * Argument name.
+     */
+    private final String name;
+    /**
+     * Preferred class.
+     */
+    private final Class preferredClass;
+    /**
      * Constructs new enum value.
      *
      * @param name  Argument logging name
@@ -38,15 +46,6 @@ public enum Names {
         this.name = name;
         this.preferredClass = clazz;
     }
-
-    /**
-     * Argument name.
-     */
-    private final String name;
-    /**
-     * Preferred class.
-     */
-    private final Class preferredClass;
 
     /**
      * @return Argument name
@@ -65,11 +64,11 @@ public enum Names {
     /**
      * Checks that argument name equals to current name.
      *
-     * @param arg Argument to match key (name)
+     * @param arg Argument to match name
      * @return True if name matches
      */
     public boolean is(final Arg arg) {
-        return arg != null && getName().equals(arg.getKey());
+        return arg != null && getName().equals(arg.getName());
     }
 
     /**

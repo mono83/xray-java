@@ -1,15 +1,15 @@
 package com.github.mono83.xray;
 
 /**
- * Arg represents logging argument.
- * It consists of key and multiple values.
+ * Arg represents logging/metrics argument.
+ * It contains name and multiple values.
  * Immutable, thread safe.
  */
 public interface Arg {
     /**
-     * @return Argument key
+     * @return Argument name
      */
-    String getKey();
+    String getName();
 
     /**
      * Returns argument value by index.

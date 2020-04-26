@@ -11,54 +11,54 @@ public interface ReporterMetrics {
     /**
      * Reports increment with value 1.
      *
-     * @param key  Metric key
+     * @param name Metric name
      * @param args Arguments, optional
      */
-    default void inc(String key, Arg... args) {
-        this.inc(key, 1, args);
+    default void inc(String name, Arg... args) {
+        this.inc(name, 1, args);
     }
 
     /**
      * Reports increment.
      *
-     * @param key   Metric key
+     * @param name  Metric name
      * @param value Increment value
      * @param args  Arguments, optional
      */
-    void inc(String key, long value, Arg... args);
+    void inc(String name, long value, Arg... args);
 
     /**
      * Reports gauge.
      *
-     * @param key   Metric key
+     * @param name  Metric name
      * @param value Gauge value
      * @param args  Arguments, optional
      */
-    void gauge(String key, long value, Arg... args);
+    void gauge(String name, long value, Arg... args);
 
     /**
      * Reports duration.
      *
-     * @param key      Metric key
+     * @param name     Metric name
      * @param duration Duration value
      * @param args     Arguments, optional
      */
-    void duration(String key, Duration duration, Arg... args);
+    void duration(String name, Duration duration, Arg... args);
 
     /**
      * Executes provided {@link Runnable} function and sends execution time
      * metrics with nanoseconds precision.
      *
      * @param func Function to execute
-     * @param key  Metric key
+     * @param name Metric name
      * @param args Arguments, optional
      */
-    default void duration(final Runnable func, final String key, Arg... args) {
+    default void duration(final Runnable func, final String name, Arg... args) {
         Objects.requireNonNull(func, "func");
-        Objects.requireNonNull(key, "key");
+        Objects.requireNonNull(name, "name");
         long before = System.nanoTime();
         func.run();
-        this.duration(key, Duration.ofNanos(System.nanoTime() - before), args);
+        this.duration(name, Duration.ofNanos(System.nanoTime() - before), args);
     }
 
     /**
@@ -66,17 +66,17 @@ public interface ReporterMetrics {
      * metrics with nanoseconds precision.
      *
      * @param func Supplier to execute
-     * @param key  Metric key
+     * @param name Metric name
      * @param args Arguments, optional
-     * @param <T> Response type
+     * @param <T>  Response type
      * @return Value, obtained from supplier
      */
-    default <T> T duration(final Supplier<T> func, final String key, Arg... args) {
+    default <T> T duration(final Supplier<T> func, final String name, Arg... args) {
         Objects.requireNonNull(func, "func");
-        Objects.requireNonNull(key, "key");
+        Objects.requireNonNull(name, "name");
         long before = System.nanoTime();
         T result = func.get();
-        this.duration(key, Duration.ofNanos(System.nanoTime() - before), args);
+        this.duration(name, Duration.ofNanos(System.nanoTime() - before), args);
         return result;
     }
 }
