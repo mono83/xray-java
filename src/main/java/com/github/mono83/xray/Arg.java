@@ -5,7 +5,7 @@ package com.github.mono83.xray;
  * It contains name and multiple values.
  * Immutable, thread safe.
  */
-public interface Arg {
+public interface Arg extends Comparable<Arg> {
     /**
      * @return Argument name
      */
@@ -31,5 +31,10 @@ public interface Arg {
      */
     default boolean isEmpty() {
         return size() == 0;
+    }
+
+    @Override
+    default int compareTo(final Arg other) {
+        return this.getName().compareTo(other.getName());
     }
 }
