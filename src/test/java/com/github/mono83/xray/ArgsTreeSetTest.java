@@ -13,7 +13,7 @@ public class ArgsTreeSetTest {
                 new ArgNull("bar"),
                 new ArgNull("baz"),
                 new ArgGeneric<>("foo", new String[]{"value"})
-        ));
+        ), (Iterable<Arg>) null);
 
         Assert.assertEquals(ats.size(), 3);
         Assert.assertTrue(ats.get("foo").isPresent());
