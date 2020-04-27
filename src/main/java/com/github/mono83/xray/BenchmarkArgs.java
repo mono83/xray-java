@@ -56,7 +56,7 @@ public class BenchmarkArgs {
                 };
                 break;
             case "tree":
-                supplier = () -> new ArgsTreeSet(args);
+                supplier = () -> new ArgsTreeSet(args, null);
                 break;
             default:
                 throw new AssertionError("Unsupported " + type);
